@@ -7,6 +7,7 @@ module.exports = {
     background: './src/js/background.jsx',
     index: './src/js/index.jsx'
   },
+  devtool: 'source-map',
   output: {
     filename: '[name].bundle.js',
     sourceMapFilename: '[file].map',

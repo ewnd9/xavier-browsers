@@ -2,10 +2,15 @@
 
 experiments
 
+## Development
+
+`$ webpack --watch`
+
 ## Roadmap
 
 - [ ] [communicating](https://developer.chrome.com/extensions/content_scripts#host-page-communication) with origin window object
 - [ ] async loading content scripts
+- [ ] recording user events for reproduction
 
 ## icon source
 

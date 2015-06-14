@@ -31,13 +31,29 @@ chrome.runtime.onMessage.addListener(function(request, options, sendResponse) {
   }
 });
 
-let socketStatus = 'disconnected';
+let socketStatus = null;
+
+let setSocketStatus = (status) => {
+  if (status === true) {
+    console.log('connected');
+    socketStatus = 'connected';
+
+    chrome.browserAction.setBadgeText({ text: '' });
+  } else {
+    console.log('disconnected');
+    socketStatus = 'disconnected';
+
+    chrome.browserAction.setBadgeBackgroundColor({ color: 'red' });
+    chrome.browserAction.setBadgeText({ text: '!' });
+  }
+};
+
+setSocketStatus(false);
 
 var socket = io('http://localhost:3002');
 socket.on('connect', function() {
-  console.log('connected');
+  setSocketStatus(true);
 
-  socketStatus = 'connected';
   socket.emit('init', {
     adapter: 'chrome',
     commands: Commands.all
@@ -47,11 +63,11 @@ socket.on('connect', function() {
 socket.on('action', (data, fn) => {
   console.log('action', data);
   f(data);
+
   console.log(fn);
   fn('chrome complete command');
 });
 
 socket.on('disconnect', () => {
-  console.log('disconnected');
-  socketStatus = 'disconnected';
+  setSocketStatus(false);
 });
