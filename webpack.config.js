@@ -3,9 +3,9 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    content: './src/js/content.jsx',
-    background: './src/js/background.jsx',
-    index: './src/js/index.jsx'
+    content: './src/js/content.js',
+    background: './src/js/background.js',
+    index: './src/js/index.js'
   },
   devtool: 'source-map',
   output: {
@@ -26,7 +26,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         loader: 'babel'
       }
     ]

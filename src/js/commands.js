@@ -1,6 +1,6 @@
-let $ = require('jquery');
+import $ from 'jquery';
 
-let vkProvider = (function() {
+const vkProvider = (function() {
 
   let miniplayer = function(callbacks) {
     var player = $('#gp');
@@ -65,7 +65,7 @@ let vkProvider = (function() {
   };
 })();
 
-let youtubeProvider = {
+const youtubeProvider = {
   id: 'youtube.com',
   name: 'youtube.com',
   commands: [
@@ -80,7 +80,7 @@ let youtubeProvider = {
   ]
 };
 
-let googleMusicProvider = {
+const googleMusicProvider = {
   id: 'play.google.com',
   name: 'play.google.com',
   commands: [
@@ -95,10 +95,10 @@ let googleMusicProvider = {
   ]
 };
 
-let commands = [];
+const commands = [];
 
-let f = (provider) => {
-  for (var i = 0 ; i < provider.commands.length ; i++) {
+const f = provider => {
+  for (let i = 0 ; i < provider.commands.length ; i++) {
     provider.commands[i]['id'] = provider.id + '/' + provider.commands[i].name;
     provider.commands[i]['group'] = provider.name;
     provider.commands[i]['domain'] = provider.id;
@@ -114,7 +114,7 @@ f(googleMusicProvider);
 export default {
   all: commands,
   get: function(id) {
-    for (var i = 0 ; i < commands.length ; i++) {
+    for (let i = 0 ; i < commands.length ; i++) {
       if (commands[i].id === id) {
         return commands[i];
       }

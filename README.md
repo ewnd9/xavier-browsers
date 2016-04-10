@@ -1,7 +1,12 @@
 # Xavier chrome extension
 
-Chrome extension for [Xavier](https://github.com/ewnd9/xavier)
+[WIP] Contol web pages in chrome from [Xavier](https://github.com/ewnd9/xavier) (remote control application)
 
+## Install
+
+```
+$ npm install
+```
 
 ## Development
 
