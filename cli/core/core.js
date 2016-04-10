@@ -2,14 +2,13 @@
 
 const SocketIO = require('socket.io');
 
-module.exports = function(cb) {
-  const port = '3002';
+module.exports = function(port, cb) {
   const io = SocketIO(port);
 
   io.on('connection', function (socket) {
     socket.on('init', function (data) {
-      console.log('plugin connected:', data);
-      
+      console.log(`${data.adapter} connected (${data.commands.length} commands)`);
+
       cb(function(id) {
         socket.emit('action', { id }, function(response) {
           console.log(`${id} response: ${response}`);

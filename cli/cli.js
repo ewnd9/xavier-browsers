@@ -2,7 +2,7 @@
 
 console.log('waiting for a connection');
 
-require('./core/core')(function(send, commands) {
+require('./core/core')('3002', function(send, commands) {
   if (process.argv[2]) {
     const command = commands.find(command => command.id === process.argv[2]);
 
