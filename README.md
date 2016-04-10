@@ -10,7 +10,16 @@ $ npm install
 
 ## Development
 
-`$ webpack --watch`
+```
+$ node_modules/.bin/webpack --watch
+```
+
+## CLI for testing
+
+```
+$ node cli/cli
+$ node cli/cli <command-id>
+```
 
 ## icon source
 

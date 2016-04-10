@@ -6,9 +6,9 @@ import { setSocketStatus, CONNECTED, DISCONNECTED } from './badge';
 
 const f = data => {
   const command = Commands.get(data.id);
-  const domain = command.domain;
+  const domain = command.provider;
 
-  chrome.tabs.getAllInWindow(null, function(tabs){
+  chrome.tabs.query({}, function(tabs) {
     for (let i = 0 ; i < tabs.length ; i++) {
       const tab = tabs[i];
       const url = new URL(tab.url).hostname;

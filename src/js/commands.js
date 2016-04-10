@@ -11,6 +11,8 @@ const providers = [
 const commands = providers.reduce((total, provider) => {
   const providerCommands = provider.commands.map(command => {
     command.id = provider.id + '/' + command.name;
+    command.provider = provider.id;
+    
     return command;
   });
 
