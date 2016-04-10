@@ -1,16 +1,12 @@
-import $ from 'jquery';
-import Commands from './commands';
+import commands from './commands';
 
-$(() => {
-  chrome.extension.onRequest.addListener((request, options, sendResponse) => {
-    const { exec } = Commands.get(request.id);
+chrome.extension.onRequest.addListener((request, options, sendResponse) => {
+  const command = commands.get(request.id);
 
-    if (typeof exec === 'function') {
-      exec.apply(this);
-      sendResponse('success');
-    } else {
-      console.log('not a function', commands, request);
-      sendResponse('error');
-    }
-  });
+  if (command.exec) {
+    exec.apply(this);
+    sendResponse('success');
+  } else {
+    sendResponse(`error: can't find ${request.id}`);
+  }
 });

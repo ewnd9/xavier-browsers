@@ -1,15 +1,17 @@
-import $ from 'jquery';
-
 export default {
   id: 'play.google.com',
   commands: [
     {
+      name: 'play-or-pause',
+      exec: () => document.querySelector('#player-bar-play-pause').click()
+    },
+    {
       name: 'prev',
-      exec: () => { $('[data-id="rewind"]').click(); }
+      exec: () => document.querySelector('#player-bar-rewind').click()
     },
     {
       name: 'next',
-      exec: () => { $('[data-id="forward"]').click(); }
+      exec: () => document.querySelector('#player-bar-forward').click()
     }
   ]
 };
