@@ -1,9 +1,12 @@
+import { sync } from './plugin';
+
 export default {
   id: 'vk.com',
+  isContentScript: true,
   commands: [
     {
       name: 'play-or-pause',
-      exec: () => {
+      exec: sync(() => {
         const playButton = document.querySelector('#ac_play');
 
         if (playButton) {
@@ -16,15 +19,15 @@ export default {
         if (miniPlayer) {
           click(miniPlayer);
         }
-      }
+      })
     },
     {
       name: 'prev',
-      exec: () => openMiniPlayer('#ac_prev', '#pd_prev')
+      exec: sync(() => openMiniPlayer('#ac_prev', '#pd_prev'))
     },
     {
       name: 'next',
-      exec: () => openMiniPlayer('#ac_next', '#pd_next')
+      exec: sync(() => openMiniPlayer('#ac_next', '#pd_next'))
     }
   ]
 };

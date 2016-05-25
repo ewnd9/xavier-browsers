@@ -18,25 +18,28 @@ fs.stat(SOCKET, err => {
   let commands = standard;
   let send = function() {};
 
-  require('./core/core')(process.argv[2] || '3002', function(_send, _commands) {
+  const createServer = require('./core/core');
+
+  createServer(process.argv[2] || '3002', function(_send, _commands) {
     commands = standard.concat(_commands);
     send = _send;
   });
 
   const unixServer = net.createServer(connection => {
     connection.on('data', data => {
-      const name = data.toString();
+      const obj = JSON.parse(data.toString());
 
-      if (name === ALL.id) {
+      if (obj.id === ALL.id) {
         connection.write(commands.map(_ => _.id).join('\n'));
       } else {
-        const command = commands.find(command => command.id === name);
+        const command = commands.find(command => command.id === obj.id);
 
         if (!command) {
           connection.write('not found');
         } else {
-          send(command.id);
-          connection.write('ok');
+          send(obj, (id, data) => {
+            connection.write(JSON.stringify(data));
+          });
         }
       }
     });
