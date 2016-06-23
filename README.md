@@ -1,31 +1,26 @@
 # Xavier chrome extension
 
-[WIP] Contol Chrome via websocket bridge in a Chrome extension from CLI
+A Chrome extension for [Xavier](https://github.com/ewnd9/xavier) Remote Control CLI
 
 ## Commands
 
 ```
-chrome/tabs
-chrome/active-tab
-chrome/activate-tab <url>
-chrome/move-right
-chrome/move-left
+$ xavier chrome/tabs
+$ xavier chrome/active-tab
+$ xavier chrome/activate-tab <url>
+$ xavier chrome/move-right
+$ xavier chrome/move-left
 
-play.google.com/play-or-pause
-play.google.com/prev
-play.google.com/next
+$ xavier play.google.com/play-or-pause
+$ xavier play.google.com/prev
+$ xavier play.google.com/next
 
-vk.com/play-or-pause
-vk.com/prev
-vk.com/next
+$ xavier vk.com/play-or-pause
+$ xavier vk.com/prev
+$ xavier vk.com/next
 
-youtube.com/play-or-pause
+$ xavier youtube.com/play-or-pause
 ```
-
-## Why not webdriver?
-
-According to
-https://sqa.stackexchange.com/questions/317/attach-to-browser-not-spawned-by-selenium2 it is not that easy.
 
 ## Install
 
@@ -59,3 +54,7 @@ $ npm run build
 ## icon source
 
 http://www.iconarchive.com/show/button-ui-system-apps-icons-by-blackvariant/X11-icon.html
+
+## License
+
+MIT © [ewnd9](http://ewnd9.com)
