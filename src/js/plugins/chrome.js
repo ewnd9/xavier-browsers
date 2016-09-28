@@ -66,7 +66,9 @@ function activateTab([url]) {
   return getTabs()
     .then(tabs => {
       const normalized = (
-        url.indexOf('http://') !== 0 && url.indexOf('https://') !== 0 ?
+        url.indexOf('http://') !== 0 &&
+        url.indexOf('https://') !== 0 &&
+        url.indexOf('chrome-extension://') !== 0 ?
           `http://${url}` : url
       );
 
