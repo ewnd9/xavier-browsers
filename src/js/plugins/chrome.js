@@ -77,13 +77,20 @@ function activateTab([url]) {
         const url = new URL(tab.url);
 
         if (url.hostname === normalizedUrl.hostname && url.pathname === normalizedUrl.pathname) {
+          const params = {
+            active: true
+          };
+
+          if (url.hash !== normalizedUrl.hash) {
+            params.url = normalizedUrl.href;
+          }
+
+          chrome.tabs.update(tab.id, params);
           return true;
         }
       });
 
-      if (tab) {
-        chrome.tabs.update(tab.id, { active: true });
-      } else {
+      if (!tab) {
         chrome.tabs.create({ url: normalized });
       }
     })
