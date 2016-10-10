@@ -1,4 +1,5 @@
-import { promise } from './plugin';
+import { promise, sync } from './plugin';
+import scrollTo from './utils/scroll';
 
 export default {
   id: 'chrome',
@@ -23,9 +24,24 @@ export default {
     {
       name: 'move-left',
       exec: promise(() => getNearTab(-1))
+    },
+    {
+      name: 'scroll-up',
+      isContentScript: true,
+      exec: sync(() => scroll(-500))
+    },
+    {
+      name: 'scroll-down',
+      isContentScript: true,
+      exec: sync(() => scroll(+500))
     }
   ]
 };
+
+function scroll(diff) {
+  const top = document.body.scrollTop;
+  scrollTo(top + diff);
+}
 
 function getTabs() {
   return new Promise(resolve => {

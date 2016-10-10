@@ -10,6 +10,8 @@ $ xavier chrome/active-tab
 $ xavier chrome/activate-tab <url>
 $ xavier chrome/move-right
 $ xavier chrome/move-left
+$ xavier chrome/scroll-up
+$ xavier chrome/scroll-down
 
 $ xavier play.google.com/play-or-pause
 $ xavier play.google.com/prev

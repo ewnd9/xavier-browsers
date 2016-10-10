@@ -14,7 +14,10 @@ const commands = providers.reduce((total, provider) => {
   const providerCommands = provider.commands.map(command => {
     command.id = provider.id + '/' + command.name;
     command.provider = provider.id;
-    command.isContentScript = provider.isContentScript;
+
+    if (typeof command.isContentScript === 'undefined') {
+      command.isContentScript = provider.isContentScript;
+    }
 
     return command;
   });
@@ -39,20 +42,24 @@ export function executeCommand(data, callback) {
 
   if (command.isContentScript) {
     chrome.tabs.query({}, function(tabs) {
-      for (let i = 0 ; i < tabs.length ; i++) {
-        const tab = tabs[i];
-        const url = new URL(tab.url).hostname;
+      let tab;
 
-        if (url.indexOf(domain) > -1) {
-          chrome.tabs.sendRequest(tab.id, data, function(arg) {
-            callback(arg);
-          });
-        }
+      if (domain === 'chrome') {
+        tab = tabs.find(tab => tab.active);
+      } else {
+        tab = tabs.find(tab => {
+          const url = new URL(tab.url).hostname;
+          return url.indexOf(domain) > -1;
+        });
       }
+
+      chrome.tabs.sendRequest(tab.id, data, function(arg) {
+        callback(arg);
+      });
     });
   } else {
     command.exec(data, callback);
   }
-};
+}
 
 export default Commands;

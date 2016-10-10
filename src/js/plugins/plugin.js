@@ -4,7 +4,7 @@ export function sync(fn) {
       fn(data.args);
       cb(formatResponse(data.id, 'ok'));
     } catch (err) {
-      cb(formatResponse(data.id, 'err'));
+      cb(formatResponse(data.id, `err: ${err.stack || err}`));
     }
   };
 };
