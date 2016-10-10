@@ -26,6 +26,14 @@ export default {
       exec: promise(() => getNearTab(-1))
     },
     {
+      name: 'close-right',
+      exec: promise(() => closeNearTab(1))
+    },
+    {
+      name: 'close-left',
+      exec: promise(() => closeNearTab(-1))
+    },
+    {
       name: 'scroll-up',
       isContentScript: true,
       exec: sync(() => scroll(-500))
@@ -57,16 +65,7 @@ function getActiveTab(args) {
 }
 
 function getActiveTabIndex(tabs) {
-  let activeIndex = -1;
-
-  for (let i = 0 ; i < tabs.length ; i++) {
-    if (tabs[i].active) {
-      activeIndex = i;
-      break;
-    }
-  }
-
-  return activeIndex;
+  return tabs.findIndex(t => t.active);
 }
 
 function getNearTab(diff) {
@@ -75,6 +74,26 @@ function getNearTab(diff) {
       const activeIndex = getActiveTabIndex(tabs);
       const nextIndex = (activeIndex + diff + tabs.length) % tabs.length;
       chrome.tabs.update(tabs[nextIndex].id, { active: true });
+    });
+}
+
+function closeNearTab(diff) {
+  return getTabs()
+    .then(tabs => {
+      const activeIndex = getActiveTabIndex(tabs);
+      const nextIndex = activeIndex + diff;
+
+      if (nextIndex >= 0 && nextIndex < tabs.length) {
+        return new Promise((resolve, reject) => {
+          chrome.tabs.remove(tabs[nextIndex].id, () => {
+            if (chrome.runtime.lastError) {
+              reject(chrome.runtime.lastError);
+            }
+
+            resolve();
+          });
+        });
+      }
     });
 }
 

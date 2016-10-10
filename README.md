@@ -8,8 +8,12 @@ A Chrome extension for [Xavier](https://github.com/ewnd9/xavier) Remote Control 
 $ xavier chrome/tabs
 $ xavier chrome/active-tab
 $ xavier chrome/activate-tab <url>
+
 $ xavier chrome/move-right
 $ xavier chrome/move-left
+$ xavier chrome/close-right
+$ xavier chrome/close-left
+
 $ xavier chrome/scroll-up
 $ xavier chrome/scroll-down
 
